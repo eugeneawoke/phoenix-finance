@@ -5,14 +5,49 @@ import { useState, useRef, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Send, CheckCircle, AlertCircle } from 'lucide-react'
 import { cn } from '@/lib/utils/cn'
+import PhoneInput from 'react-phone-number-input'
+import type { Country } from 'react-phone-number-input'
+import 'react-phone-number-input/style.css'
 
 type FormState = 'idle' | 'submitting' | 'success' | 'error'
+
+function detectCountryFromTimezone(): Country {
+  try {
+    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone
+    const tzCountryMap: Record<string, Country> = {
+      'Asia/Tbilisi': 'GE',
+      'Europe/Moscow': 'RU',
+      'Europe/Samara': 'RU',
+      'Asia/Yekaterinburg': 'RU',
+      'Europe/London': 'GB',
+      'America/New_York': 'US',
+      'America/Chicago': 'US',
+      'America/Los_Angeles': 'US',
+      'Europe/Berlin': 'DE',
+      'Europe/Paris': 'FR',
+      'Europe/Istanbul': 'TR',
+      'Asia/Dubai': 'AE',
+      'Europe/Kiev': 'UA',
+      'Europe/Kyiv': 'UA',
+      'Europe/Minsk': 'BY',
+      'Asia/Almaty': 'KZ',
+      'Asia/Baku': 'AZ',
+      'Asia/Yerevan': 'AM',
+    }
+    return tzCountryMap[tz] || 'GE'
+  } catch {
+    return 'GE'
+  }
+}
 
 export function ContactForm() {
   const t = useTranslations('contact')
   const tc = useTranslations('common')
   const [formState, setFormState] = useState<FormState>('idle')
   const [errorMessage, setErrorMessage] = useState('')
+  const [consentChecked, setConsentChecked] = useState(false)
+  const [phone, setPhone] = useState<string | undefined>()
+  const [defaultCountry] = useState<Country>(detectCountryFromTimezone)
   const formLoadedAt = useRef(Date.now())
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -25,7 +60,6 @@ export function ContactForm() {
     // Time-based bot detection (client-side)
     const elapsed = Date.now() - formLoadedAt.current
     if (elapsed < 2000) {
-      // Silently reject — looks like a success to bots
       setFormState('success')
       return
     }
@@ -43,7 +77,7 @@ export function ContactForm() {
         body: JSON.stringify({
           name: formData.get('name'),
           email: formData.get('email'),
-          phone: formData.get('phone'),
+          phone: phone || '',
           subject: formData.get('subject'),
           message: formData.get('message'),
           _token: formData.get('_token'),
@@ -54,6 +88,8 @@ export function ContactForm() {
       if (response.ok) {
         setFormState('success')
         ;(e.target as HTMLFormElement).reset()
+        setPhone(undefined)
+        setConsentChecked(false)
         formLoadedAt.current = Date.now()
       } else {
         const data = await response.json().catch(() => ({}))
@@ -69,7 +105,6 @@ export function ContactForm() {
   // Generate token on mount
   const [token, setToken] = useState('')
   useEffect(() => {
-    // Use base64url encoding to match server-side decoding
     const raw = JSON.stringify({ t: Date.now() })
     const b64 = btoa(raw).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '')
     setToken(b64)
@@ -145,7 +180,7 @@ export function ContactForm() {
             <div>
               <label
                 htmlFor="contact-name"
-                className="block text-sm font-medium text-phoenix-gray-300 mb-2"
+                className="block text-sm font-medium text-phoenix-gray-300 mb-2 pl-4"
               >
                 {t('name')} *
               </label>
@@ -161,7 +196,7 @@ export function ContactForm() {
             <div>
               <label
                 htmlFor="contact-email"
-                className="block text-sm font-medium text-phoenix-gray-300 mb-2"
+                className="block text-sm font-medium text-phoenix-gray-300 mb-2 pl-4"
               >
                 {t('email')} *
               </label>
@@ -180,22 +215,23 @@ export function ContactForm() {
             <div>
               <label
                 htmlFor="contact-phone"
-                className="block text-sm font-medium text-phoenix-gray-300 mb-2"
+                className="block text-sm font-medium text-phoenix-gray-300 mb-2 pl-4"
               >
                 {t('phone')}
               </label>
-              <input
-                id="contact-phone"
-                name="phone"
-                type="tel"
-                className="w-full bg-phoenix-navy-800 border border-white/10 rounded-xl px-4 py-3 text-phoenix-white placeholder:text-phoenix-gray-600 focus:border-phoenix-gold focus:outline-none transition-colors"
-                placeholder="+995 ..."
-              />
+              <div className="w-full bg-phoenix-navy-800 border border-white/10 rounded-xl px-4 py-3 focus-within:border-phoenix-gold transition-colors">
+                <PhoneInput
+                  international
+                  defaultCountry={defaultCountry}
+                  value={phone}
+                  onChange={(val) => setPhone(val)}
+                />
+              </div>
             </div>
             <div>
               <label
                 htmlFor="contact-subject"
-                className="block text-sm font-medium text-phoenix-gray-300 mb-2"
+                className="block text-sm font-medium text-phoenix-gray-300 mb-2 pl-4"
               >
                 {t('subject')}
               </label>
@@ -210,13 +246,16 @@ export function ContactForm() {
                 <option value="ngo">{t('subjects.ngo')}</option>
                 <option value="other">{t('subjects.other')}</option>
               </select>
+              <p className="text-xs text-phoenix-gray-500 mt-1.5 pl-4">
+                {t('subject_hint')}
+              </p>
             </div>
           </div>
 
           <div>
             <label
               htmlFor="contact-message"
-              className="block text-sm font-medium text-phoenix-gray-300 mb-2"
+              className="block text-sm font-medium text-phoenix-gray-300 mb-2 pl-4"
             >
               {t('message')} *
             </label>
@@ -230,6 +269,24 @@ export function ContactForm() {
             />
           </div>
 
+          {/* Consent checkbox */}
+          <div className="flex items-start gap-3">
+            <input
+              type="checkbox"
+              id="consent"
+              checked={consentChecked}
+              onChange={(e) => setConsentChecked(e.target.checked)}
+              required
+              className="mt-1 w-4 h-4 rounded border-white/20 bg-phoenix-navy-800 text-phoenix-gold focus:ring-phoenix-gold cursor-pointer accent-phoenix-gold"
+            />
+            <label htmlFor="consent" className="text-sm text-phoenix-gray-400 cursor-pointer">
+              {t('consent')}{' '}
+              <a href="/privacy" className="text-phoenix-gold hover:underline">
+                {t('consent_link')}
+              </a>
+            </label>
+          </div>
+
           {formState === 'error' && errorMessage && (
             <div className="flex items-center gap-2 text-error text-sm">
               <AlertCircle size={16} />
@@ -239,10 +296,10 @@ export function ContactForm() {
 
           <button
             type="submit"
-            disabled={formState === 'submitting'}
+            disabled={formState === 'submitting' || !consentChecked}
             className={cn(
-              'btn-gold w-full py-4 text-lg font-semibold inline-flex items-center justify-center gap-2',
-              formState === 'submitting' && 'opacity-70 cursor-not-allowed'
+              'btn-gold w-full py-4 text-lg font-semibold inline-flex items-center justify-center gap-2 group',
+              (formState === 'submitting' || !consentChecked) && 'opacity-70 cursor-not-allowed'
             )}
           >
             {formState === 'submitting' ? (
@@ -253,7 +310,7 @@ export function ContactForm() {
             ) : (
               <>
                 {t('submit')}
-                <Send size={18} />
+                <Send size={18} className="transition-transform group-hover:translate-x-1" />
               </>
             )}
           </button>

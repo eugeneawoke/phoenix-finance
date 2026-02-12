@@ -2,11 +2,13 @@
   "nav": {
     "home": "Home",
     "services": "Services",
+    "projects": "Projects",
     "ngo": "NGO",
     "education": "Education",
     "about": "About Us",
     "contact": "Contact",
     "dashboard": "Dashboard",
+    "for_clients": "For Clients",
     "login": "Log In",
     "partnership": "Partnership",
     "more": "More",
@@ -18,14 +20,15 @@
     "blog": "Blog"
   },
   "hero": {
-    "title": "Phoenix Finance Revolution — Your Trusted Accounting Partner in Georgia",
-    "subtitle": "Professional accounting, tax consulting, and financial services for businesses of all sizes. Serving clients in English, Georgian, and Russian.",
+    "title": "Turnkey Accounting & Tax Services for Businesses in Georgia",
+    "subtitle": "From company registration to reporting and tax planning. We explain complex things in simple language.",
     "cta_primary": "Get a Free Consultation",
-    "cta_secondary": "Explore Our Services"
+    "cta_secondary": "View Services",
+    "micro_promise": "We respond within 1 business day"
   },
   "services": {
     "title": "Our Services",
-    "subtitle": "Comprehensive financial and accounting solutions tailored for your business in Georgia",
+    "subtitle": "We take care of the reporting routine so you can focus on your business",
     "view_all": "View All Services",
     "order_service": "Order Service",
     "get_consultation": "Get Consultation",
@@ -38,11 +41,21 @@
       "payroll": "Payroll Management",
       "reporting": "Financial Reporting",
       "international": "International Tax Planning"
+    },
+    "descriptions": {
+      "accounting": "Monthly bookkeeping and financial reporting for your business",
+      "tax": "Tax planning and filing of all required declarations",
+      "audit": "Independent verification of financial statements and internal processes",
+      "consulting": "Strategic financial advice and business optimization",
+      "registration": "Full support for company registration in Georgia",
+      "payroll": "Salary calculation, taxes, and employee reporting",
+      "reporting": "Preparation of financial statements to international standards",
+      "international": "Cross-border tax planning and transfer pricing"
     }
   },
   "about": {
     "title": "About Phoenix Finance Revolution",
-    "description": "Phoenix Finance Revolution is a trusted accounting and financial services company based in Tbilisi, Georgia. We provide comprehensive solutions for businesses of all sizes, serving clients in English, Georgian, and Russian.",
+    "description": "We help companies in Georgia build transparent and efficient financial management. Our team speaks your language — literally and figuratively.",
     "values": {
       "trust": {
         "title": "Trust & Reliability",
@@ -63,22 +76,54 @@
     }
   },
   "stats": {
-    "clients": "500+ Clients",
-    "years": "15+ Years of Experience",
-    "languages": "3 Languages",
-    "satisfaction": "98% Satisfaction Rate"
+    "clients": "Clients",
+    "years": "Years of Experience",
+    "satisfaction": "of clients renew their partnership"
+  },
+  "why_us": {
+    "title": "Why Us",
+    "foreign": "Experience with foreign legal entities",
+    "legislation": "Deep knowledge of Georgian legislation and international standards",
+    "manager": "Dedicated personal manager for each client"
+  },
+  "testimonials": {
+    "title": "Our Clients Trust Us",
+    "subtitle": "We are proud to partner with companies across Georgia",
+    "case_title": "Results That Speak",
+    "cases": {
+      "case1": "Reduced the tax burden of an IT company by 18% through international structuring",
+      "case2": "Set up full accounting for a startup from scratch in just 5 days",
+      "case3": "Saved a client $12,000/year by switching to an optimized tax regime"
+    },
+    "reviews": {
+      "review1": {
+        "text": "Phoenix Finance took over our accounting from day one and we haven't had a single issue with the tax authority.",
+        "author": "CEO, Tech Startup"
+      },
+      "review2": {
+        "text": "Professional, responsive, and they actually explain things in a way we can understand. Highly recommend.",
+        "author": "Director, Import Company"
+      },
+      "review3": {
+        "text": "They helped us navigate complex cross-border taxation. The personal manager approach is truly a game changer.",
+        "author": "CFO, International Firm"
+      }
+    }
   },
   "company": {
     "title": "Phoenix Finance Revolution LLC",
     "address": "Tbilisi, Georgia",
     "phone": "+995 XXX XXX XXX",
+    "email": "info@phoenix-finance.ge",
     "tax_id": "Tax ID: XXXXXXXXX",
     "bank": "Bank of Georgia"
   },
   "ngo": {
     "title": "Non-Governmental Organization",
     "subtitle": "Supporting financial literacy, education, and community development across Georgia",
+    "explanation": "Through our NGO, we organize free educational events for small businesses and aspiring entrepreneurs.",
     "cta": "Learn About Our Mission",
+    "cta_description": "Programs, events, and ways to get involved",
     "events": "Upcoming Events",
     "partners": "Our Partners",
     "donate": "Support Our Cause"
@@ -89,7 +134,12 @@
     "blog": "Blog",
     "videos": "Video Lessons",
     "read_more": "Read More",
-    "related_articles": "Related Articles"
+    "view_all_articles": "All Educational Materials",
+    "related_articles": "Related Articles",
+    "article_placeholder_1": "How to Register a Company in Georgia: Step-by-Step Guide",
+    "article_placeholder_2": "Tax Optimization for IT Companies in Georgia",
+    "article_placeholder_3": "Financial Reporting: What Every Business Owner Should Know",
+    "article_excerpt": "A comprehensive guide covering the key aspects that every entrepreneur in Georgia needs to know."
   },
   "subscribe": {
     "title": "Stay Updated",
@@ -105,12 +155,15 @@
     "phone": "Phone Number",
     "message": "Your Message",
     "subject": "Subject",
+    "subject_hint": "Choose what interests you so we can respond faster",
     "submit": "Send Message",
     "success": "Thank you! Your message has been sent successfully. We will get back to you shortly.",
     "success_followup": "We'll get back to you shortly.",
     "send_another": "Send another message",
     "sending": "Sending...",
     "network_error": "Network error. Please try again.",
+    "consent": "I agree to the processing of personal data",
+    "consent_link": "Privacy Policy",
     "subjects": {
       "general": "General Inquiry",
       "services": "Services & Pricing",
@@ -134,11 +187,15 @@
     "for_stipendiants": "For Scholarship Recipients"
   },
   "footer": {
+    "positioning": "Helping companies in Georgia build transparent and efficient financial management.",
     "rights": "All rights reserved",
     "privacy": "Privacy Policy",
     "terms": "Terms of Service",
     "commercial_socials": "Commercial Social Media",
-    "ngo_socials": "NGO Social Media"
+    "ngo_socials": "NGO Social Media",
+    "socials_desc": "Quick questions about services",
+    "whatsapp_desc": "Quick questions about services",
+    "telegram_desc": "News and updates"
   },
   "common": {
     "loading": "Loading...",
@@ -149,6 +206,11 @@
     "see_all": "See All",
     "learn_more": "Learn More",
     "from_price": "From"
+  },
+  "coming_soon": {
+    "title": "Coming Soon",
+    "subtitle": "We are working on this page. It will be available very soon.",
+    "back_home": "Back to Home"
   },
   "auth": {
     "login": "Log In",

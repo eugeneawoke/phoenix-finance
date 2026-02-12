@@ -26,7 +26,7 @@ export function EducationBanner() {
           </p>
         </motion.div>
 
-        {/* Placeholder article cards (will be dynamic later from CMS) */}
+        {/* Article cards using placeholder translations */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {[1, 2, 3].map((i) => (
             <motion.div
@@ -49,11 +49,10 @@ export function EducationBanner() {
                     {t('blog')}
                   </div>
                   <h3 className="text-lg font-semibold text-phoenix-white mb-2 line-clamp-2">
-                    Article Title Placeholder {i}
+                    {t('article_placeholder_' + i)}
                   </h3>
                   <p className="text-sm text-phoenix-gray-400 mb-4 line-clamp-3">
-                    A brief excerpt about this educational article covering
-                    important accounting and financial topics.
+                    {t('article_excerpt')}
                   </p>
                   <span className="text-sm text-phoenix-gold font-medium inline-flex items-center gap-1 group-hover:gap-2 transition-all">
                     {t('read_more')}
@@ -74,9 +73,13 @@ export function EducationBanner() {
         >
           <Link
             href="/education"
-            className="btn-ghost px-6 py-3 text-base inline-flex items-center gap-2"
+            className="btn-gold px-8 py-4 text-base inline-flex items-center gap-2 group font-semibold"
           >
-            {t('related_articles')} →
+            {t('view_all_articles')}
+            <ArrowRight
+              size={18}
+              className="transition-transform group-hover:translate-x-1"
+            />
           </Link>
         </motion.div>
       </div>

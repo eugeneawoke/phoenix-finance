@@ -8,6 +8,8 @@ import {
   MapPin,
   MessageCircle,
   Send,
+  Building2,
+  CreditCard,
 } from 'lucide-react'
 
 const footerNav = [
@@ -55,7 +57,7 @@ export function Footer() {
               <span className="text-phoenix-white">Finance</span>
             </Link>
             <p className="text-phoenix-gray-400 text-sm mb-6 leading-relaxed">
-              {t('hero.subtitle')}
+              {t('footer.positioning')}
             </p>
             <div className="space-y-3 text-sm text-phoenix-gray-400">
               <div className="flex items-start gap-2">
@@ -68,7 +70,15 @@ export function Footer() {
               </div>
               <div className="flex items-center gap-2">
                 <Mail size={16} className="shrink-0 text-phoenix-gold" />
+                <span>{t('company.email')}</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Building2 size={16} className="shrink-0 text-phoenix-gold" />
                 <span>{t('company.title')}</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <CreditCard size={16} className="shrink-0 text-phoenix-gold" />
+                <span>{t('company.tax_id')}</span>
               </div>
             </div>
           </div>
@@ -95,30 +105,46 @@ export function Footer() {
           ))}
         </div>
 
-        {/* Social links */}
+        {/* Social links + legal */}
         <div className="mt-12 pt-8 border-t border-white/5">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div className="flex items-center gap-4">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
+            {/* Socials with shared description */}
+            <div className="flex items-center gap-3">
               <a
                 href="#"
                 aria-label="WhatsApp"
-                className="p-2 rounded-lg text-phoenix-gray-400 hover:text-phoenix-gold hover:bg-white/5 transition-colors cursor-pointer"
+                className="p-2 rounded-lg text-phoenix-gray-400 hover:text-phoenix-gold hover:bg-white/5 transition-colors"
               >
                 <MessageCircle size={20} />
               </a>
               <a
                 href="#"
                 aria-label="Telegram"
-                className="p-2 rounded-lg text-phoenix-gray-400 hover:text-phoenix-gold hover:bg-white/5 transition-colors cursor-pointer"
+                className="p-2 rounded-lg text-phoenix-gray-400 hover:text-phoenix-gold hover:bg-white/5 transition-colors"
               >
                 <Send size={20} />
               </a>
+              <span className="text-xs text-phoenix-gray-500 hidden sm:inline">
+                {t('footer.socials_desc')}
+              </span>
             </div>
-            <p className="text-sm text-phoenix-gray-500">
-              &copy; {new Date().getFullYear()} Phoenix Finance Revolution.{' '}
-              {t('footer.rights')}
-            </p>
+
+            {/* Legal links */}
+            <div className="flex items-center gap-4 text-xs text-phoenix-gray-500">
+              <Link href="/privacy" className="hover:text-phoenix-gray-300 transition-colors">
+                {t('footer.privacy')}
+              </Link>
+              <span>|</span>
+              <Link href="/terms" className="hover:text-phoenix-gray-300 transition-colors">
+                {t('footer.terms')}
+              </Link>
+            </div>
           </div>
+
+          <p className="text-sm text-phoenix-gray-500 text-center mt-6">
+            &copy; {new Date().getFullYear()} Phoenix Finance Revolution.{' '}
+            {t('footer.rights')}
+          </p>
         </div>
       </div>
     </footer>

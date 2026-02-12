@@ -12,8 +12,8 @@ import {
   DollarSign,
   BarChart3,
   Globe,
+  ArrowRight,
 } from 'lucide-react'
-import { cn } from '@/lib/utils/cn'
 
 const serviceIcons: Record<string, React.ElementType> = {
   accounting: Calculator,
@@ -41,7 +41,7 @@ export function ServicesOverview() {
   const t = useTranslations('services')
 
   return (
-    <section className="py-20 md:py-28 relative">
+    <section id="services" className="py-20 md:py-28 relative">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -77,8 +77,17 @@ export function ServicesOverview() {
                     <Icon size={24} className="text-phoenix-gold" />
                   </div>
                   <h3 className="text-lg font-semibold text-phoenix-white mb-2">
-                    {t(`categories.${key}`)}
+                    {t('categories.' + key)}
                   </h3>
+                  <p className="text-sm text-phoenix-gray-400 leading-relaxed mb-3">
+                    {t('descriptions.' + key)}
+                  </p>
+                  <span className="text-sm text-phoenix-gold font-medium inline-flex items-center gap-1">
+                    <ArrowRight
+                      size={14}
+                      className="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300"
+                    />
+                  </span>
                 </Link>
               </motion.div>
             )
@@ -94,9 +103,13 @@ export function ServicesOverview() {
         >
           <Link
             href="/services"
-            className="btn-ghost px-6 py-3 text-base inline-flex items-center gap-2"
+            className="btn-ghost px-6 py-3 text-base inline-flex items-center gap-2 group"
           >
-            {t('view_all')} →
+            {t('view_all')}
+            <ArrowRight
+              size={16}
+              className="transition-transform group-hover:translate-x-1"
+            />
           </Link>
         </motion.div>
       </div>

@@ -29,17 +29,28 @@ export function NGOBanner() {
               <h2 className="text-2xl sm:text-3xl font-bold mb-2">
                 {t('title')}
               </h2>
-              <p className="text-phoenix-gray-400 max-w-xl">
+              <p className="text-phoenix-gray-400 max-w-xl mb-3">
                 {t('subtitle')}
               </p>
+              <p className="text-sm text-phoenix-gray-500 max-w-xl">
+                {t('explanation')}
+              </p>
             </div>
-            <Link
-              href="/ngo"
-              className="btn-ghost px-6 py-3 inline-flex items-center gap-2 shrink-0 border-ngo-purple/30 text-ngo-purple-light hover:border-ngo-purple hover:bg-ngo-purple/10 hover:text-ngo-purple-light"
-            >
-              {t('cta')}
-              <ArrowRight size={18} />
-            </Link>
+            <div className="shrink-0 flex flex-col items-center gap-2">
+              <Link
+                href="/ngo"
+                className="btn-ghost px-6 py-3 inline-flex items-center gap-2 border-ngo-purple/30 text-ngo-purple-light hover:border-ngo-purple hover:bg-ngo-purple/10 hover:text-ngo-purple-light group"
+              >
+                {t('cta')}
+                <ArrowRight
+                  size={18}
+                  className="transition-transform group-hover:translate-x-1"
+                />
+              </Link>
+              <span className="text-xs text-phoenix-gray-500">
+                {t('cta_description')}
+              </span>
+            </div>
           </div>
         </motion.div>
       </div>
