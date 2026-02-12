@@ -28,10 +28,7 @@ export default buildConfig({
   editor: lexicalEditor(),
   db: postgresAdapter({
     pool: {
-      connectionString: (() => {
-        if (!process.env.DATABASE_URL) throw new Error('DATABASE_URL env variable is required')
-        return process.env.DATABASE_URL
-      })(),
+      connectionString: process.env.DATABASE_URL || '',
     },
   }),
   collections: [Users, Services, ContactSubmissions, NewsletterSubscribers, Media],
@@ -48,9 +45,6 @@ export default buildConfig({
   typescript: {
     outputFile: path.resolve(dirname, '../../payload-types.ts'),
   },
-  secret: (() => {
-    if (!process.env.PAYLOAD_SECRET) throw new Error('PAYLOAD_SECRET env variable is required')
-    return process.env.PAYLOAD_SECRET
-  })(),
+  secret: process.env.PAYLOAD_SECRET || 'build-placeholder-secret-not-for-runtime',
   sharp,
 })
