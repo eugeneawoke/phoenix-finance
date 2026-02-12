@@ -14,8 +14,7 @@
     "jsx": "preserve",
     "incremental": true,
     "paths": {
-      "@/*": ["./src/*"],
-      "@payload-config": ["./src/lib/payload/payload.config.ts"]
+      "@/*": ["./src/*"]
     },
     "plugins": [
       { "name": "next" }
@@ -27,5 +26,5 @@
     "**/*.tsx",
     ".next/types/**/*.ts"
   ],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "src/lib/payload"]
 }
