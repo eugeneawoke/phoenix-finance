@@ -35,7 +35,7 @@ export function LanguageSwitcher({ className }: { className?: string }) {
   function switchLocale(nextLocale: string) {
     setOpen(false)
     startTransition(() => {
-      router.replace(pathname, { locale: nextLocale })
+      router.replace(pathname, { locale: nextLocale, scroll: false })
     })
   }
 
