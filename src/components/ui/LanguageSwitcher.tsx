@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect, useTransition } from 'react'
 import { useLocale } from 'next-intl'
 import { usePathname, useRouter } from '@/lib/i18n/routing'
 import { ChevronDown } from 'lucide-react'
@@ -19,6 +19,7 @@ export function LanguageSwitcher({ className }: { className?: string }) {
   const pathname = usePathname()
   const router = useRouter()
   const [open, setOpen] = useState(false)
+  const [isPending, startTransition] = useTransition()
   const containerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -32,8 +33,10 @@ export function LanguageSwitcher({ className }: { className?: string }) {
   }, [])
 
   function switchLocale(nextLocale: string) {
-    router.replace(pathname, { locale: nextLocale })
     setOpen(false)
+    startTransition(() => {
+      router.replace(pathname, { locale: nextLocale })
+    })
   }
 
   return (
@@ -41,7 +44,10 @@ export function LanguageSwitcher({ className }: { className?: string }) {
       <button
         type="button"
         onClick={() => setOpen((prev) => !prev)}
-        className="flex items-center gap-1.5 rounded-[var(--radius-md)] border border-white/10 bg-phoenix-navy-800 px-3 py-2 text-sm font-medium text-white transition-colors hover:border-phoenix-gold/50 hover:text-phoenix-gold-light"
+        className={cn(
+          'flex items-center gap-1.5 rounded-[var(--radius-md)] border border-white/10 bg-phoenix-navy-800 px-3 py-2 text-sm font-medium text-white transition-colors hover:border-phoenix-gold/50 hover:text-phoenix-gold-light',
+          isPending && 'opacity-60 pointer-events-none',
+        )}
         aria-expanded={open}
         aria-haspopup="listbox"
       >

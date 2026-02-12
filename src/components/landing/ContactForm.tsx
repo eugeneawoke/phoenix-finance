@@ -5,11 +5,46 @@ import { useState, useRef, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Send, CheckCircle, AlertCircle } from 'lucide-react'
 import { cn } from '@/lib/utils/cn'
-import PhoneInput from 'react-phone-number-input'
+import PhoneInput, {
+  getCountries,
+  getCountryCallingCode,
+} from 'react-phone-number-input'
 import type { Country } from 'react-phone-number-input'
 import 'react-phone-number-input/style.css'
 
 type FormState = 'idle' | 'submitting' | 'success' | 'error'
+
+/* ── Calling-code → country map (built once at module level) ── */
+const callingCodeToCountry = new Map<string, Country>()
+// First pass: fill with all countries (first match wins)
+for (const c of getCountries()) {
+  const code = getCountryCallingCode(c)
+  if (!callingCodeToCountry.has(code)) {
+    callingCodeToCountry.set(code, c)
+  }
+}
+// Second pass: preferred countries override ambiguous codes (e.g. +7 → RU not KZ)
+const preferredCountries: Country[] = [
+  'GE', 'RU', 'US', 'GB', 'DE', 'FR', 'UA', 'BY', 'KZ', 'TR', 'AE', 'AZ', 'AM',
+]
+for (const c of preferredCountries) {
+  try {
+    const code = getCountryCallingCode(c)
+    callingCodeToCountry.set(code, c)
+  } catch { /* skip invalid */ }
+}
+
+function detectCountryFromCallingCode(phone: string): Country | undefined {
+  if (!phone || !phone.startsWith('+')) return undefined
+  const digits = phone.slice(1).replace(/\D/g, '')
+  // Try longest prefix first (max calling code is 3 digits)
+  for (let len = Math.min(digits.length, 3); len >= 1; len--) {
+    const prefix = digits.substring(0, len)
+    const country = callingCodeToCountry.get(prefix)
+    if (country) return country
+  }
+  return undefined
+}
 
 function detectCountryFromTimezone(): Country {
   try {
@@ -47,8 +82,32 @@ export function ContactForm() {
   const [errorMessage, setErrorMessage] = useState('')
   const [consentChecked, setConsentChecked] = useState(false)
   const [phone, setPhone] = useState<string | undefined>()
-  const [defaultCountry] = useState<Country>(detectCountryFromTimezone)
+  const [country, setCountry] = useState<Country>(detectCountryFromTimezone)
+  const shouldRefocus = useRef(false)
+  const phoneContainerRef = useRef<HTMLDivElement>(null)
   const formLoadedAt = useRef(Date.now())
+
+  // Re-focus phone input after country (key) change
+  useEffect(() => {
+    if (shouldRefocus.current) {
+      shouldRefocus.current = false
+      const input = phoneContainerRef.current?.querySelector('input')
+      if (input) {
+        requestAnimationFrame(() => input.focus())
+      }
+    }
+  }, [country])
+
+  function handlePhoneChange(value: string | undefined) {
+    setPhone(value)
+    if (value && value.length >= 2) {
+      const detected = detectCountryFromCallingCode(value)
+      if (detected && detected !== country) {
+        shouldRefocus.current = true
+        setCountry(detected)
+      }
+    }
+  }
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -90,6 +149,7 @@ export function ContactForm() {
         ;(e.target as HTMLFormElement).reset()
         setPhone(undefined)
         setConsentChecked(false)
+        setCountry(detectCountryFromTimezone())
         formLoadedAt.current = Date.now()
       } else {
         const data = await response.json().catch(() => ({}))
@@ -219,12 +279,17 @@ export function ContactForm() {
               >
                 {t('phone')}
               </label>
-              <div className="w-full bg-phoenix-navy-800 border border-white/10 rounded-xl px-4 py-3 focus-within:border-phoenix-gold transition-colors">
+              <div
+                ref={phoneContainerRef}
+                className="w-full bg-phoenix-navy-800 border border-white/10 rounded-xl px-4 py-3 focus-within:border-phoenix-gold transition-colors"
+              >
                 <PhoneInput
+                  key={country}
                   international
-                  defaultCountry={defaultCountry}
+                  defaultCountry={country}
                   value={phone}
-                  onChange={(val) => setPhone(val)}
+                  onChange={handlePhoneChange}
+                  onCountryChange={(c) => c && setCountry(c)}
                 />
               </div>
             </div>
