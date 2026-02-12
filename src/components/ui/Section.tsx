@@ -1,0 +1,18 @@
+import { type HTMLAttributes } from 'react'
+import { cn } from '@/lib/utils/cn'
+
+export interface SectionProps extends HTMLAttributes<HTMLElement> {
+  id?: string
+}
+
+export function Section({ className, children, id, ...props }: SectionProps) {
+  return (
+    <section
+      id={id}
+      className={cn('py-16 md:py-24', className)}
+      {...props}
+    >
+      {children}
+    </section>
+  )
+}

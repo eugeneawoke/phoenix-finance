@@ -1,0 +1,162 @@
+{
+  "nav": {
+    "home": "Home",
+    "services": "Services",
+    "ngo": "NGO",
+    "education": "Education",
+    "about": "About Us",
+    "contact": "Contact",
+    "dashboard": "Dashboard",
+    "login": "Log In",
+    "partnership": "Partnership",
+    "more": "More",
+    "accounting": "Accounting",
+    "tax": "Tax Services",
+    "audit": "Audit",
+    "consulting": "Consulting",
+    "company": "Company",
+    "blog": "Blog"
+  },
+  "hero": {
+    "title": "Phoenix Finance Revolution — Your Trusted Accounting Partner in Georgia",
+    "subtitle": "Professional accounting, tax consulting, and financial services for businesses of all sizes. Serving clients in English, Georgian, and Russian.",
+    "cta_primary": "Get a Free Consultation",
+    "cta_secondary": "Explore Our Services"
+  },
+  "services": {
+    "title": "Our Services",
+    "subtitle": "Comprehensive financial and accounting solutions tailored for your business in Georgia",
+    "view_all": "View All Services",
+    "order_service": "Order Service",
+    "get_consultation": "Get Consultation",
+    "categories": {
+      "accounting": "Accounting",
+      "tax": "Tax Services",
+      "audit": "Audit",
+      "consulting": "Financial Consulting",
+      "registration": "Business Registration",
+      "payroll": "Payroll Management",
+      "reporting": "Financial Reporting",
+      "international": "International Tax Planning"
+    }
+  },
+  "about": {
+    "title": "About Phoenix Finance Revolution",
+    "description": "Phoenix Finance Revolution is a trusted accounting and financial services company based in Tbilisi, Georgia. We provide comprehensive solutions for businesses of all sizes, serving clients in English, Georgian, and Russian.",
+    "values": {
+      "trust": {
+        "title": "Trust & Reliability",
+        "description": "We build long-term relationships with our clients based on transparency, integrity, and consistent delivery of high-quality services."
+      },
+      "excellence": {
+        "title": "Professional Excellence",
+        "description": "Our team of certified professionals stays at the forefront of accounting standards and tax regulations to provide expert guidance."
+      },
+      "global": {
+        "title": "Global Perspective",
+        "description": "With international tax planning expertise and multilingual support, we help businesses navigate cross-border financial complexities."
+      },
+      "client_focus": {
+        "title": "Client-Centered Approach",
+        "description": "Every solution is tailored to your specific business needs. We listen, understand, and deliver personalized financial strategies."
+      }
+    }
+  },
+  "stats": {
+    "clients": "500+ Clients",
+    "years": "15+ Years of Experience",
+    "languages": "3 Languages",
+    "satisfaction": "98% Satisfaction Rate"
+  },
+  "company": {
+    "title": "Phoenix Finance Revolution LLC",
+    "address": "Tbilisi, Georgia",
+    "phone": "+995 XXX XXX XXX",
+    "tax_id": "Tax ID: XXXXXXXXX",
+    "bank": "Bank of Georgia"
+  },
+  "ngo": {
+    "title": "Non-Governmental Organization",
+    "subtitle": "Supporting financial literacy, education, and community development across Georgia",
+    "cta": "Learn About Our Mission",
+    "events": "Upcoming Events",
+    "partners": "Our Partners",
+    "donate": "Support Our Cause"
+  },
+  "education": {
+    "title": "Education & Resources",
+    "subtitle": "Stay informed with the latest insights in accounting, taxation, and financial management",
+    "blog": "Blog",
+    "videos": "Video Lessons",
+    "read_more": "Read More",
+    "related_articles": "Related Articles"
+  },
+  "subscribe": {
+    "title": "Stay Updated",
+    "subtitle": "Subscribe to our newsletter for the latest financial news, tips, and regulatory updates in Georgia",
+    "button": "Subscribe",
+    "placeholder": "Enter your email address"
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "Get in touch with our team for any inquiries or to schedule a consultation",
+    "name": "Full Name",
+    "email": "Email Address",
+    "phone": "Phone Number",
+    "message": "Your Message",
+    "subject": "Subject",
+    "submit": "Send Message",
+    "success": "Thank you! Your message has been sent successfully. We will get back to you shortly.",
+    "success_followup": "We'll get back to you shortly.",
+    "send_another": "Send another message",
+    "sending": "Sending...",
+    "network_error": "Network error. Please try again.",
+    "subjects": {
+      "general": "General Inquiry",
+      "services": "Services & Pricing",
+      "partnership": "Partnership Opportunity",
+      "ngo": "NGO & Community",
+      "other": "Other"
+    }
+  },
+  "partnership": {
+    "title": "Partnership Programs",
+    "subtitle": "Join our network and grow together — we offer multiple collaboration opportunities",
+    "types": {
+      "partner": "Business Partner",
+      "sponsor": "Sponsor",
+      "intern": "Intern",
+      "stipendiant": "Scholarship Recipient"
+    },
+    "apply": "Apply Now",
+    "for_sponsors": "For Sponsors",
+    "for_interns": "For Interns",
+    "for_stipendiants": "For Scholarship Recipients"
+  },
+  "footer": {
+    "rights": "All rights reserved",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "commercial_socials": "Commercial Social Media",
+    "ngo_socials": "NGO Social Media"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Something went wrong. Please try again.",
+    "back": "Back",
+    "next": "Next",
+    "prev": "Previous",
+    "see_all": "See All",
+    "learn_more": "Learn More",
+    "from_price": "From"
+  },
+  "auth": {
+    "login": "Log In",
+    "register": "Create Account",
+    "forgot_password": "Forgot Password?",
+    "email": "Email",
+    "password": "Password",
+    "confirm_password": "Confirm Password",
+    "submit": "Submit"
+  }
+}
