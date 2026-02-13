@@ -12,17 +12,22 @@
     "payload": "echo 'Payload CMS disabled — no database configured yet'"
   },
   "dependencies": {
+    "@sanity/image-url": "^1.2.0",
+    "@sanity/vision": "^4.22.0",
     "clsx": "^2.1.1",
     "framer-motion": "^11.0.0",
     "lucide-react": "^0.468.0",
     "next": "15.4.11",
     "next-intl": "^3.0.0",
+    "next-sanity": "^11.6.12",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-hook-form": "^7.0.0",
     "react-phone-number-input": "^3.4.14",
     "recharts": "^2.0.0",
+    "sanity": "^4.22.0",
     "sharp": "^0.33.0",
+    "styled-components": "^6.3.9",
     "tailwind-merge": "^3.4.0",
     "zod": "^3.0.0",
     "zustand": "^5.0.0"
