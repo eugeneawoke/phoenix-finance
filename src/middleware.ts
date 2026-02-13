@@ -8,11 +8,11 @@ export const config = {
     /*
      * Match all pathnames except:
      * - /api (API routes)
-     * - /admin (Payload CMS admin)
+     * - /studio (Sanity Studio)
      * - /_next (Next.js internals)
      * - /images, /fonts (static files in /public)
      * - Files with extensions (.ico, .svg, .png, .jpg, etc.)
      */
-    '/((?!api|admin|_next|images|fonts|.*\\..*).*)',
+    '/((?!api|studio|_next|images|fonts|.*\\..*).*)',
   ],
 }

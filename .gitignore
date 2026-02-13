@@ -42,11 +42,6 @@ Thumbs.db
 *.tsbuildinfo
 next-env.d.ts
 
-# Payload
-/src/payload-types.ts
-
-# Media uploads (dev)
-/media/
 
 # Coverage
 /coverage/

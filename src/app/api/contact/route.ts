@@ -96,8 +96,7 @@ export async function POST(request: NextRequest) {
     const data = result.data
 
     // 6. Store submission
-    // For MVP without database: log and return success
-    // In production: save to Payload CMS ContactSubmissions collection
+    // TODO: Send to Salesforce CRM when configured
     console.log('[Contact Form]', {
       name: data.name,
       email: data.email,
@@ -107,21 +106,6 @@ export async function POST(request: NextRequest) {
       ip,
       timestamp: new Date().toISOString(),
     })
-
-    // TODO: In production, uncomment:
-    // const payload = await getPayload({ config: payloadConfig })
-    // await payload.create({
-    //   collection: 'contact-submissions',
-    //   data: {
-    //     name: data.name,
-    //     email: data.email,
-    //     phone: data.phone,
-    //     subject: data.subject,
-    //     message: data.message,
-    //     source: 'website',
-    //     status: 'new',
-    //   },
-    // })
 
     return NextResponse.json({ success: true })
   } catch (error) {

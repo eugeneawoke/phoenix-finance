@@ -46,7 +46,7 @@ export async function POST(request: NextRequest) {
       timestamp: new Date().toISOString(),
     })
 
-    // TODO: Save to Payload CMS NewsletterSubscribers collection
+    // TODO: Send to Salesforce CRM or email service when configured
 
     return NextResponse.json({ success: true })
   } catch (error) {

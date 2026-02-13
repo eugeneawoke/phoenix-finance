@@ -8,8 +8,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "type-check": "tsc --noEmit",
-    "payload": "echo 'Payload CMS disabled — no database configured yet'"
+    "type-check": "tsc --noEmit"
   },
   "dependencies": {
     "@sanity/image-url": "^1.2.0",
