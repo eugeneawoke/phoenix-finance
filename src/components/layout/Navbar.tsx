@@ -127,10 +127,10 @@ export function Navbar() {
           <div className="hidden md:flex items-center gap-3">
             <LanguageSwitcher />
             <Link
-              href="/dashboard"
-              className="px-4 py-2 text-sm font-medium rounded-lg border border-phoenix-gold/40 text-phoenix-gold hover:bg-phoenix-gold/10 transition-colors"
+              href="/contact"
+              className="btn-gold px-4 py-2 text-sm font-medium rounded-lg"
             >
-              {t('for_clients')}
+              {t('contact')}
             </Link>
           </div>
 
@@ -195,11 +195,11 @@ export function Navbar() {
               <div className="flex items-center justify-between mt-3 px-3">
                 <LanguageSwitcher />
                 <Link
-                  href="/dashboard"
+                  href="/contact"
                   onClick={() => setMobileOpen(false)}
-                  className="px-4 py-2 text-sm font-medium rounded-lg border border-phoenix-gold/40 text-phoenix-gold hover:bg-phoenix-gold/10 transition-colors"
+                  className="btn-gold px-4 py-2 text-sm font-medium rounded-lg text-center"
                 >
-                  {t('for_clients')}
+                  {t('contact')}
                 </Link>
               </div>
             </div>

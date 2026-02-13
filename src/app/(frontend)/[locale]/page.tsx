@@ -2,10 +2,12 @@ import { setRequestLocale } from 'next-intl/server'
 import { Hero } from '@/components/landing/Hero'
 import { ServicesOverview } from '@/components/landing/ServicesOverview'
 import { Stats } from '@/components/landing/Stats'
+import { HowItWorks } from '@/components/landing/HowItWorks'
 import { Testimonials } from '@/components/landing/Testimonials'
 import { NGOBanner } from '@/components/landing/NGOBanner'
 import { EducationBanner } from '@/components/landing/EducationBanner'
 import { SubscribeBanner } from '@/components/landing/SubscribeBanner'
+import { FAQ } from '@/components/landing/FAQ'
 import { ContactForm } from '@/components/landing/ContactForm'
 
 type Props = {
@@ -22,12 +24,14 @@ export default async function HomePage({ params }: Props) {
       <div className="section-divider" />
       <ServicesOverview />
       <Stats />
+      <HowItWorks />
       <Testimonials />
       <div className="section-divider" />
       <NGOBanner />
       <EducationBanner />
       <div className="section-divider" />
       <SubscribeBanner />
+      <FAQ />
       <ContactForm />
     </>
   )

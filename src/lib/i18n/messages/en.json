@@ -7,7 +7,6 @@
     "education": "Education",
     "about": "About Us",
     "contact": "Contact",
-    "dashboard": "Dashboard",
     "for_clients": "For Clients",
     "login": "Log In",
     "partnership": "Partnership",
@@ -140,6 +139,58 @@
     "article_placeholder_2": "Tax Optimization for IT Companies in Georgia",
     "article_placeholder_3": "Financial Reporting: What Every Business Owner Should Know",
     "article_excerpt": "A comprehensive guide covering the key aspects that every entrepreneur in Georgia needs to know."
+  },
+  "how_it_works": {
+    "title": "How It Works",
+    "subtitle": "From your first inquiry to ongoing support — five simple steps to stress-free financial management",
+    "step1": {
+      "title": "Free Consultation",
+      "description": "Tell us about your business and goals. We assess your situation and recommend the best approach — no obligations, no hidden fees."
+    },
+    "step2": {
+      "title": "Document Collection",
+      "description": "We provide a clear checklist and help you gather all required documents. No guesswork — we guide you through every step."
+    },
+    "step3": {
+      "title": "Setup & Configuration",
+      "description": "We set up your accounting system, reporting structure, and tax framework tailored to your business type and size."
+    },
+    "step4": {
+      "title": "Ongoing Management",
+      "description": "Monthly bookkeeping, tax filing, and financial reporting — all handled by your dedicated manager on autopilot."
+    },
+    "step5": {
+      "title": "Growth & Optimization",
+      "description": "We proactively review your finances, find tax savings, and adapt your strategy as your business grows."
+    }
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "subtitle": "Quick answers to the most common questions about our services",
+    "q1": {
+      "question": "What services does Phoenix Finance provide?",
+      "answer": "We offer full-cycle accounting, tax planning and filing, financial reporting, business registration in Georgia, payroll management, audit services, and international tax planning. Whether you're a startup or an established company, we tailor our services to your needs."
+    },
+    "q2": {
+      "question": "How quickly can you set up accounting for my business?",
+      "answer": "For most businesses, we can have your accounting fully set up within 3–5 business days. This includes configuring your reporting structure, tax framework, and assigning a dedicated personal manager."
+    },
+    "q3": {
+      "question": "What documents do I need to get started?",
+      "answer": "Typically, we need your company registration documents, tax ID, bank account details, and any existing financial records. Don't worry — we'll provide a complete checklist and guide you through the process."
+    },
+    "q4": {
+      "question": "Is the initial consultation really free?",
+      "answer": "Yes, absolutely. The first consultation is completely free with no obligations. We'll assess your situation, answer your questions, and recommend the best approach for your business."
+    },
+    "q5": {
+      "question": "Do you work with foreign companies registered in Georgia?",
+      "answer": "Yes, this is one of our core strengths. We have extensive experience with international businesses, cross-border taxation, and foreign legal entities operating in Georgia."
+    },
+    "q6": {
+      "question": "How much do your services cost?",
+      "answer": "Our pricing depends on your business size and the scope of services you need. We offer flexible packages starting from basic bookkeeping to full financial management. Contact us for a personalized quote."
+    }
   },
   "subscribe": {
     "title": "Stay Updated",
