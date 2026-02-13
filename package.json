@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "next dev",
-    "prebuild": "sanity manifest extract --path public/.sanity",
+    "prebuild": "sanity manifest extract --path public/static",
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
