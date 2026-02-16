@@ -1,5 +1,7 @@
 # Phoenix Finance Revolution — Полная структура проекта
 
+> **Текущий стек (актуально):** Next.js + **Sanity** (CMS). Личный кабинет, дашборд, Payload CMS, БД (PostgreSQL/Drizzle), миграции и Docker **не используются** и в проекте отключены.
+
 ## Содержание
 
 1. [Обзор архитектуры](#1-обзор-архитектуры)
@@ -36,15 +38,15 @@
 ┌─────────────────────────────────────────────────────────────────┐
 │                    NEXT.JS 15 (App Router)                      │
 │                                                                 │
-│  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────────────┐   │
-│  │ Лендинг  │  │ Услуги   │  │  Блог/   │  │   Личный     │   │
-│  │ (SSG)    │  │ (SSR)    │  │  Обучение │  │   кабинет    │   │
-│  │          │  │          │  │  (ISR)    │  │   (CSR+SSR)  │   │
-│  └──────────┘  └──────────┘  └──────────┘  └──────────────┘   │
+│  ┌──────────┐  ┌──────────┐  ┌──────────┐                       │
+│  │ Лендинг  │  │ Услуги   │  │  Блог/   │                       │
+│  │ (SSG)    │  │ (SSR)    │  │  Обучение │                       │
+│  │          │  │          │  │  (ISR)    │                       │
+│  └──────────┘  └──────────┘  └──────────┘                       │
 │                                                                 │
 │  ┌──────────────────────────────────────────────────────────┐   │
-│  │              Payload CMS (встроен в Next.js)              │   │
-│  │  Admin Panel │ API │ Auth │ Media │ i18n │ Access Control │   │
+│  │              Sanity CMS (Studio, контент)                 │   │
+│  │  Контент через Sanity Studio │ next-sanity │ i18n         │   │
 │  └──────────────────────────────────────────────────────────┘   │
 │                                                                 │
 │  ┌──────────────────────────────────────────────────────────┐   │
@@ -53,14 +55,10 @@
 │  └──────────────────────────────────────────────────────────┘   │
 └────────────────────────────┬────────────────────────────────────┘
                              │
-              ┌──────────────┼──────────────┐
-              ▼              ▼              ▼
-┌──────────────┐  ┌──────────────┐  ┌──────────────┐
-│  PostgreSQL  │  │    Redis     │  │  S3/MinIO    │
-│  (основная   │  │  (кэш,       │  │  (документы, │
-│   БД)        │  │   сессии,    │  │   медиа)     │
-│              │  │   очереди)   │  │              │
-└──────────────┘  └──────────────┘  └──────────────┘
+                             ▼
+┌──────────────────────────────────────────────────────────────┐
+│  (БД, Redis, Docker не используются — только Sanity + Vercel) │
+└──────────────────────────────────────────────────────────────┘
               │
               ├──────────────────────────────────┐
               ▼                                  ▼
@@ -74,15 +72,12 @@
 └──────────────────────┘          └──────────────────────┘
 ```
 
-### Ключевой принцип: Monorepo с Next.js + Payload CMS
+### Ключевой принцип: Next.js + Sanity CMS
 
-**Почему Payload CMS 3.x + Next.js 15:**
-- Payload CMS 3.x **нативно встраивается в Next.js** — один проект, один деплой
-- Полноценная CMS-админка для маркетолога (без разработчика)
-- TypeScript-native — строгая типизация из коробки
-- Встроенная i18n, access control, media management
-- REST + GraphQL API автоматически
-- Маркетолог редактирует контент через `/admin` панель
+**Текущий стек:**
+- **Next.js** — фронт, API routes, SSR/SSG/ISR
+- **Sanity** — headless CMS: контент редактируется в Sanity Studio (`/studio`), доставляется через next-sanity
+- Личный кабинет, Payload, БД (PostgreSQL/Drizzle), Docker и миграции в проекте не используются
 
 ---
 
@@ -100,19 +95,15 @@
 | **Zustand** | State management | Лёгкий, простой, для клиентского состояния |
 | **React Hook Form + Zod** | Формы | Валидация, производительность |
 | **Lucide Icons** | Иконки | Консистентный набор SVG-иконок |
-| **Recharts** | Графики/дашборд | Для личного кабинета, статистика |
+| **Recharts** | Графики | Для визуализации данных на сайте (при необходимости) |
 
 ### Backend
 
 | Технология | Назначение | Почему |
 |---|---|---|
-| **Payload CMS 3.x** | CMS + Backend | Встроен в Next.js, admin panel, auth, API |
+| **Sanity** | CMS | Headless CMS, контент в Sanity Studio, next-sanity на фронте |
 | **Node.js 20 LTS** | Runtime | Стабильная версия |
-| **PostgreSQL 16** | Основная БД | Надёжная, поддержка JSON, полнотекстовый поиск |
-| **Drizzle ORM** (через Payload) | ORM | TypeScript-native, миграции |
-| **Redis 7** | Кэш/очереди | Сессии, rate limiting, очередь задач |
-| **BullMQ** | Очередь задач | Фоновые задачи (email, CRM sync, AI) |
-| **MinIO / S3** | Файловое хранилище | Документы клиентов, медиа |
+| *(БД, Redis, Docker не используются в текущем проекте)* |
 
 ### Сервисы и интеграции
 
@@ -130,11 +121,10 @@
 
 | Технология | Назначение |
 |---|---|
-| **Docker + Docker Compose** | Контейнеризация |
-| **GitHub Actions** | CI/CD |
-| **Vercel** | Деплой frontend + backend (или VPS) |
-| **Sentry** | Мониторинг ошибок |
-| **PostHog** | Аналитика (self-hosted опция) |
+| **Vercel** | Деплой (рекомендуется для Next.js + Sanity) |
+| **GitHub Actions** | CI/CD (по необходимости) |
+| **Sentry** | Мониторинг ошибок (опционально) |
+| *(Docker в проекте не используется)* |
 
 ---
 
@@ -333,33 +323,15 @@ phoenix-finance/
 │   │   │   │
 │   │   │   └── middleware.ts             # GeoIP → определение языка
 │   │   │
-│   │   ├── (dashboard)/                  # Группа — личный кабинет
-│   │   │   ├── layout.tsx                # Dashboard layout (sidebar + header)
-│   │   │   └── dashboard/
-│   │   │       ├── page.tsx              # Обзор (заказы, счета)
-│   │   │       ├── orders/               # Мои заказы
-│   │   │       │   ├── page.tsx
-│   │   │       │   └── [id]/page.tsx
-│   │   │       ├── invoices/             # Счета
-│   │   │       │   ├── page.tsx
-│   │   │       │   └── [id]/page.tsx
-│   │   │       ├── documents/            # Документы (загрузка/скачивание)
-│   │   │       │   └── page.tsx
-│   │   │       ├── settings/             # Настройки профиля
-│   │   │       │   └── page.tsx
-│   │   │       └── support/              # Поддержка
-│   │   │           └── page.tsx
+│   │   # (dashboard не используется — личный кабинет отключён)
 │   │   │
-│   │   ├── (auth)/                       # Группа — авторизация
+│   │   ├── (auth)/                       # Группа — авторизация (при необходимости)
 │   │   │   ├── login/page.tsx
 │   │   │   ├── register/page.tsx
 │   │   │   ├── forgot-password/page.tsx
 │   │   │   └── reset-password/page.tsx
 │   │   │
-│   │   ├── (payload)/                    # Payload CMS Admin
-│   │   │   └── admin/
-│   │   │       └── [[...segments]]/
-│   │   │           └── page.tsx          # Payload Admin Panel → /admin
+│   │   # (Payload не используется — CMS: Sanity Studio)
 │   │   │
 │   │   ├── api/                          # API Routes
 │   │   │   ├── payments/
@@ -401,7 +373,6 @@ phoenix-finance/
 │   │   ├── layout/
 │   │   │   ├── Navbar.tsx                # Glassmorphism навбар
 │   │   │   ├── Footer.tsx                # Футер с реквизитами
-│   │   │   ├── Sidebar.tsx               # Dashboard sidebar
 │   │   │   └── MobileMenu.tsx
 │   │   │
 │   │   ├── landing/                      # Секции лендинга
@@ -434,12 +405,7 @@ phoenix-finance/
 │   │   │   ├── DonateWidget.tsx          # Виджет донатов
 │   │   │   └── PartnerCard.tsx
 │   │   │
-│   │   ├── dashboard/
-│   │   │   ├── OrdersTable.tsx
-│   │   │   ├── InvoiceCard.tsx
-│   │   │   ├── DocumentUpload.tsx        # Безопасная загрузка
-│   │   │   ├── DocumentViewer.tsx
-│   │   │   └── StatusBadge.tsx
+│   │   # dashboard-компоненты не используются (личный кабинет отключён)
 │   │   │
 │   │   ├── chat/
 │   │   │   ├── AIChatWidget.tsx          # Плавающий виджет AI
@@ -454,37 +420,7 @@ phoenix-finance/
 │   │       └── ErrorBoundary.tsx
 │   │
 │   ├── lib/
-│   │   ├── payload/                      # Payload CMS config
-│   │   │   ├── payload.config.ts         # Главный конфиг Payload
-│   │   │   ├── collections/              # Коллекции (модели данных)
-│   │   │   │   ├── Users.ts
-│   │   │   │   ├── Services.ts
-│   │   │   │   ├── Orders.ts
-│   │   │   │   ├── Invoices.ts
-│   │   │   │   ├── Documents.ts
-│   │   │   │   ├── BlogPosts.ts
-│   │   │   │   ├── Videos.ts
-│   │   │   │   ├── Events.ts
-│   │   │   │   ├── Partners.ts
-│   │   │   │   ├── PartnerApplications.ts
-│   │   │   │   ├── ContactSubmissions.ts
-│   │   │   │   ├── NewsletterSubscribers.ts
-│   │   │   │   ├── Donations.ts
-│   │   │   │   └── Media.ts
-│   │   │   ├── globals/                  # Глобальные настройки (CMS)
-│   │   │   │   ├── SiteSettings.ts       # Общие настройки сайта
-│   │   │   │   ├── Navigation.ts         # Навигация
-│   │   │   │   ├── CompanyDetails.ts     # Реквизиты (ИНН, адрес, тел.)
-│   │   │   │   ├── SocialLinks.ts        # Соцсети по разделам
-│   │   │   │   └── AdSettings.ts         # Настройки рекламных баннеров
-│   │   │   ├── access/                   # Правила доступа
-│   │   │   │   ├── isAdmin.ts
-│   │   │   │   ├── isManager.ts
-│   │   │   │   └── isOwner.ts
-│   │   │   └── hooks/                    # Payload hooks
-│   │   │       ├── syncToSalesforce.ts   # После создания заявки → CRM
-│   │   │       ├── sendNotification.ts   # Email/push уведомления
-│   │   │       └── encryptDocument.ts    # Шифрование документов
+│   │   # (payload не используется — CMS: Sanity, см. src/sanity/)
 │   │   │
 │   │   ├── integrations/
 │   │   │   ├── salesforce/
@@ -545,15 +481,11 @@ phoenix-finance/
 │   ├── fonts/                            # Локальные шрифты (если нужно)
 │   └── locales/                          # Статические переводы
 │
-├── migrations/                           # DB миграции (Drizzle/Payload)
 ├── scripts/                              # Вспомогательные скрипты
-│   ├── seed.ts                           # Начальные данные
-│   └── sync-salesforce.ts                # Скрипт синхронизации
+│   ├── seed.ts                           # Начальные данные (при необходимости)
+│   └── sync-salesforce.ts                # Скрипт синхронизации (при необходимости)
 │
-├── docker/
-│   ├── Dockerfile
-│   ├── docker-compose.yml
-│   └── docker-compose.prod.yml
+│   # migrations/ и docker/ не используются
 │
 ├── .env.example                          # Переменные окружения (шаблон)
 ├── .env.local                            # Локальные переменные (не в git!)
@@ -594,23 +526,15 @@ phoenix-finance/
 /partnership/interns        → Для стажёров
 /partnership/stipendiants   → Для стипендиатов
 
-ЛИЧНЫЙ КАБИНЕТ (Dashboard)
-/dashboard                  → Обзор
-/dashboard/orders           → Мои заказы
-/dashboard/orders/[id]      → Детали заказа
-/dashboard/invoices         → Счета
-/dashboard/invoices/[id]    → Детали счёта
-/dashboard/documents        → Документы
-/dashboard/settings         → Настройки профиля
-/dashboard/support          → Поддержка
+# Личный кабинет (dashboard) не используется
 
-АВТОРИЗАЦИЯ
+АВТОРИЗАЦИЯ (при необходимости)
 /login                      → Вход
 /register                   → Регистрация
 /forgot-password            → Восстановление пароля
 
-CMS АДМИН
-/admin                      → Payload CMS Admin Panel
+CMS
+/studio                     → Sanity Studio (редактирование контента)
 ```
 
 ### Секции главной страницы (лендинг)
@@ -618,7 +542,7 @@ CMS АДМИН
 ```
 ┌─────────────────────────────────────────────────────────┐
 │  NAVBAR (glassmorphism, fixed)                           │
-│  Logo │ Услуги │ НКО │ Обучение │ О нас │ EN/GE/RU │ ЛК │
+│  Logo │ Услуги │ НКО │ Обучение │ О нас │ EN/GE/RU     │
 ├─────────────────────────────────────────────────────────┤
 │                                                         │
 │  HERO SECTION                                           │
@@ -693,12 +617,16 @@ CMS АДМИН
 
 ## 5. Backend
 
-### Payload CMS Collections (модели данных)
+### Backend и данные
 
-#### Users (Пользователи)
+Контент управляется через **Sanity** (схемы в `src/sanity/schemaTypes/`). Payload CMS, БД (PostgreSQL/Drizzle) и миграции в проекте не используются.
+
+*(Ниже — справочное описание моделей для возможных API/интеграций; не привязано к Payload.)*
+
+#### Пример структуры пользователя (справочно)
 
 ```typescript
-// src/lib/payload/collections/Users.ts
+// Не используется в текущем проекте (нет БД/Payload)
 {
   slug: 'users',
   auth: {
@@ -772,7 +700,7 @@ CMS АДМИН
     { name: 'order', type: 'number', defaultValue: 0 },
     { name: 'image', type: 'upload', relationTo: 'media' },
   ],
-  // Маркетолог может редактировать через /admin
+  // Маркетолог может редактировать через Sanity Studio (/studio)
   access: {
     read: () => true,
     create: isAdminOrManager,
@@ -1208,12 +1136,7 @@ POST   /api/dashboard/documents   → Загрузка документа
         │              │ isActive                  │
         │              └──────────────────────────┘
 
-ДОПОЛНИТЕЛЬНЫЕ ТАБЛИЦЫ (генерирует Payload автоматически):
-- media              → файлы, изображения
-- payload_migrations → миграции
-- payload_preferences → настройки пользователей CMS
-- _rels_*            → таблицы связей
-- _locales_*         → локализованные поля
+*(БД и миграции в проекте не используются. Контент — Sanity.)*
 ```
 
 ### Redis — ключи и структура
@@ -1264,12 +1187,14 @@ phoenix-finance-storage/
 
 ## 7. CMS
 
-### Payload CMS Admin Panel → `/admin`
+### CMS: Sanity Studio → `/studio`
 
-Маркетолог/менеджер может управлять через визуальный интерфейс:
+Контент редактируется в **Sanity Studio** (не Payload). Админка: `/studio`.
+
+Справочно — возможная структура контента:
 
 ```
-ADMIN DASHBOARD (/admin)
+SANITY STUDIO (/studio)
 ├── Контент
 │   ├── Услуги (Services)          → Создать/редактировать/удалить услугу
 │   │   └── Поля: название, описание, цена, категория, изображение
@@ -1315,7 +1240,7 @@ ADMIN DASHBOARD (/admin)
 ```
 admin     → полный доступ ко всему
 manager   → редактирование контента, просмотр заявок, управление заказами
-client    → личный кабинет (только свои данные)
+client    → (личный кабинет в проекте не используется)
 partner   → ограниченный просмотр (партнёрский раздел)
 ```
 
@@ -1327,7 +1252,7 @@ partner   → ограниченный просмотр (партнёрский 
 │  EN   │  GE   │  RU   │
 └───────┴───────┴───────┘
 Маркетолог переключается между языками и заполняет контент.
-Payload хранит переводы в отдельных столбцах БД.
+В Sanity локализация настраивается в схемах (поля с массивом языков).
 ```
 
 ---
@@ -1607,7 +1532,7 @@ Telegram        →  Telegram Bot (BotFather)       →  Приветствие 
 │  6. Воронка стипендиатов                                │
 │                                                         │
 │  Синхронизация:                                         │
-│  - Real-time (через hooks Payload → Salesforce API)    │
+│  - Real-time (через webhooks/API при необходимости)    │
 │  - Batch (ежедневная сверка через BullMQ job)          │
 │  - Webhook (Salesforce → Phoenix через Outbound Messages)│
 └─────────────────────────────────────────────────────────┘
@@ -1650,7 +1575,7 @@ Telegram        →  Telegram Bot (BotFather)       →  Приветствие 
 
 Реализация в CMS:
 - Global "SocialLinks" с разделением по section (commercial / ngo)
-- Маркетолог может менять ссылки через /admin
+- Маркетолог может менять ссылки через Sanity Studio (/studio)
 - WhatsApp и Telegram — открывают диалог (deep links)
 - Остальные — переход на профиль
 ```
@@ -1739,14 +1664,14 @@ HEADERS (через middleware):
 - Referrer-Policy: strict-origin-when-cross-origin
 
 АУТЕНТИФИКАЦИЯ:
-- Payload CMS built-in auth (JWT + HTTP-only cookies)
+- (Авторизация/сессии при необходимости — в проекте не используются)
 - Хэширование паролей: bcrypt (cost factor 12)
 - Rate limiting на login (5 попыток → блокировка 10 мин)
 - CORS: whitelist только наши домены
 
 ДАННЫЕ:
 - Все пользовательские данные → валидация через Zod
-- SQL-инъекции: невозможны через ORM (Drizzle)
+- SQL-инъекции: БД в проекте не используется (контент в Sanity)
 - XSS: React + DOMPurify + CSP headers
 - Бэкапы БД: ежедневно, зашифрованные, в отдельном хранилище
 
@@ -1760,53 +1685,7 @@ HEADERS (через middleware):
 
 ## 12. Развёртывание
 
-### Docker Compose (Production)
-
-```yaml
-# docker/docker-compose.prod.yml
-services:
-  app:
-    build: .
-    ports: ["3000:3000"]
-    environment:
-      - DATABASE_URL=postgres://...
-      - REDIS_URL=redis://redis:6379
-      - S3_BUCKET=phoenix-finance-storage
-      - PAYLOAD_SECRET=...
-      - OPENAI_API_KEY=...
-      - SALESFORCE_CLIENT_ID=...
-      - BOG_MERCHANT_ID=...
-    depends_on: [postgres, redis]
-
-  postgres:
-    image: postgres:16-alpine
-    volumes: ["pgdata:/var/lib/postgresql/data"]
-    environment:
-      - POSTGRES_DB=phoenix_finance
-      - POSTGRES_USER=phoenix
-      - POSTGRES_PASSWORD=...
-
-  redis:
-    image: redis:7-alpine
-    volumes: ["redisdata:/data"]
-
-  minio:
-    image: minio/minio
-    command: server /data --console-address ":9001"
-    volumes: ["miniodata:/data"]
-    ports: ["9000:9000", "9001:9001"]
-
-  worker:
-    build: .
-    command: node dist/worker.js
-    environment: # те же что у app
-    depends_on: [postgres, redis]
-
-volumes:
-  pgdata:
-  redisdata:
-  miniodata:
-```
+*(Docker в проекте не используется. Деплой — Vercel или иной хостинг для Next.js.)*
 
 ### CI/CD (GitHub Actions)
 
@@ -1835,7 +1714,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Deploy to production
-        # Vercel, Docker deploy, или VPS через SSH
+        # Vercel (рекомендуется для Next.js + Sanity)
 ```
 
 ### Инфраструктура
@@ -1849,11 +1728,8 @@ jobs:
   └── Worker: Vercel Cron + Edge Functions
 
 Вариант B: VPS (Hetzner / DigitalOcean)
-  ├── Docker Compose (всё в одном)
   ├── Nginx reverse proxy + SSL (Let's Encrypt)
-  ├── PostgreSQL в Docker
-  ├── Redis в Docker
-  └── MinIO в Docker
+  └── Node.js (Docker в проекте не используется)
 
 Вариант C: Гибрид
   ├── App: Vercel
@@ -1874,8 +1750,7 @@ jobs:
 (необходим для провайдеров платёжных услуг)
 
 ✅ Инфраструктура:
-  - Инициализация проекта (Next.js 15 + Payload CMS 3 + PostgreSQL)
-  - Docker-окружение для локальной разработки
+  - Инициализация проекта (Next.js + Sanity)
   - Настройка Tailwind + дизайн-система (цвета, типографика, компоненты)
   - Настройка i18n (EN/GE/RU) с определением по GeoIP
 
@@ -1896,14 +1771,11 @@ jobs:
   - Кнопка "Заказать" / "Получить консультацию"
 
 ✅ Backend:
-  - Payload CMS коллекции: Users, Services, ContactSubmissions,
-    NewsletterSubscribers, Media
-  - Payload Globals: SiteSettings, CompanyDetails, Navigation, SocialLinks
+  - Sanity: схемы контента (см. src/sanity/schemaTypes/)
   - API: /api/contact, /api/newsletter
-  - Базовая авторизация (Payload built-in)
 
-✅ CMS Admin:
-  - Маркетолог может добавлять/редактировать услуги через /admin
+✅ CMS:
+  - Контент редактируется в Sanity Studio (/studio)
   - Локализация контента (EN/GE/RU)
 
 ✅ Безопасность:
@@ -1957,7 +1829,7 @@ jobs:
   - S3/MinIO для хранения файлов
 
 ✅ CMS:
-  - Управление заказами через /admin
+  - (Личный кабинет/заказы не используются)
   - Генерация и отправка счетов
 ```
 
@@ -2030,12 +1902,12 @@ jobs:
 
 ✅ Backend:
   - Коллекции: BlogPosts, Videos
-  - Rich Text editor с медиа в Payload CMS
+  - Rich Text и медиа в Sanity Studio
   - ISR (Incremental Static Regeneration) для быстрой загрузки
 
 ✅ Рекламный баннер:
   - Место для контекстной рекламы (образовательный уклон)
-  - CMS-управление баннерами через /admin
+  - CMS-управление баннерами через Sanity Studio (/studio)
 ```
 
 ### ИТЕРАЦИЯ 7 — Партнёрская программа
@@ -2075,7 +1947,7 @@ jobs:
 
 ✅ Обучение:
   - Автоматическая индексация контента из CMS
-  - Ручное добавление FAQ через /admin
+  - Ручное добавление FAQ через Sanity Studio (/studio)
   - Логирование неотвеченных вопросов
 ```
 
@@ -2126,10 +1998,6 @@ NODE_ENV=production
 # --- Database ---
 DATABASE_URL=postgres://phoenix:password@localhost:5432/phoenix_finance
 REDIS_URL=redis://localhost:6379
-
-# --- Payload CMS ---
-PAYLOAD_SECRET=your-secret-key-here
-PAYLOAD_CONFIG_PATH=src/lib/payload/payload.config.ts
 
 # --- Storage (S3/MinIO) ---
 S3_ENDPOINT=https://s3.amazonaws.com
