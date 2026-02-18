@@ -28,8 +28,8 @@ export function HowItWorks() {
     offset: ['start 0.5', 'end 0.5'],
   })
 
-  // Animate line to 100% but it stops naturally at step 4
-  const lineHeight = useSpring(useTransform(scrollYProgress, [0, 1], [0, 100]), {
+  // Limit line to 80% - stops at step 4, doesn't reach step 5
+  const lineHeight = useSpring(useTransform(scrollYProgress, [0, 1], [0, 80]), {
     stiffness: 100,
     damping: 30,
   })
