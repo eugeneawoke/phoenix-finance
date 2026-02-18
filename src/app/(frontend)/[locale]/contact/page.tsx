@@ -43,8 +43,9 @@ export default async function ContactPage({ params }: Props) {
   setRequestLocale(locale)
 
   return (
-    <div className="pt-16">
+    <main className="pt-16">
+      <h1 className="sr-only">Contact Us</h1>
       <ContactForm />
-    </div>
+    </main>
   )
 }

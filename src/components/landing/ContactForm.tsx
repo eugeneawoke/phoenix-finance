@@ -98,6 +98,14 @@ export function ContactForm() {
     }
   }, [country])
 
+  // Add id to phone input for accessibility (label linking)
+  useEffect(() => {
+    const input = phoneContainerRef.current?.querySelector('input')
+    if (input && !input.id) {
+      input.id = 'contact-phone'
+    }
+  }, [country])
+
   function handlePhoneChange(value: string | undefined) {
     setPhone(value)
     if (value && value.length >= 2) {
