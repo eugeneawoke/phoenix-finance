@@ -3,6 +3,7 @@
 import { useTranslations } from 'next-intl'
 import { motion } from 'framer-motion'
 import { Send, Mail } from 'lucide-react'
+import { Link } from '@/lib/i18n/routing'
 
 export function SubscribeBanner() {
   const t = useTranslations('subscribe')
@@ -34,10 +35,8 @@ export function SubscribeBanner() {
               </p>
             </div>
             <div className="shrink-0">
-              <a
-                href="#"
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link
+                href="/contact"
                 className="btn-gold px-8 py-4 text-lg font-semibold inline-flex items-center gap-3 group"
               >
                 {t('button')}
@@ -45,7 +44,7 @@ export function SubscribeBanner() {
                   size={20}
                   className="transition-transform group-hover:translate-x-1 group-hover:-translate-y-1"
                 />
-              </a>
+              </Link>
             </div>
           </div>
         </motion.div>

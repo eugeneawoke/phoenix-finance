@@ -6,8 +6,6 @@ import {
   Phone,
   Mail,
   MapPin,
-  MessageCircle,
-  Send,
   Building2,
   CreditCard,
 } from 'lucide-react'
@@ -108,24 +106,10 @@ export function Footer() {
         {/* Social links + legal */}
         <div className="mt-12 pt-8 border-t border-white/5">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
-            {/* Socials with shared description */}
+            {/* Socials with shared description - Coming Soon */}
             <div className="flex items-center gap-3">
-              <a
-                href="#"
-                aria-label="WhatsApp"
-                className="p-2 rounded-lg text-phoenix-gray-400 hover:text-phoenix-gold hover:bg-white/5 transition-colors"
-              >
-                <MessageCircle size={20} />
-              </a>
-              <a
-                href="#"
-                aria-label="Telegram"
-                className="p-2 rounded-lg text-phoenix-gray-400 hover:text-phoenix-gold hover:bg-white/5 transition-colors"
-              >
-                <Send size={20} />
-              </a>
-              <span className="text-xs text-phoenix-gray-500 hidden sm:inline">
-                {t('footer.socials_desc')}
+              <span className="text-xs text-phoenix-gray-500">
+                {t('footer.socials_desc')} — Coming Soon
               </span>
             </div>
 
