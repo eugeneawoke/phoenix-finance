@@ -5,6 +5,7 @@ import { useState, useRef, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Send, CheckCircle, AlertCircle } from 'lucide-react'
 import { cn } from '@/lib/utils/cn'
+import { Link } from '@/lib/i18n/routing'
 import PhoneInput, {
   getCountries,
   getCountryCallingCode,
@@ -354,9 +355,9 @@ export function ContactForm() {
             />
             <label htmlFor="consent" className="text-sm text-phoenix-gray-400 cursor-pointer">
               {t('consent')}{' '}
-              <a href="/privacy" className="text-phoenix-gold hover:underline">
+              <Link href="/privacy" className="text-phoenix-gold hover:underline">
                 {t('consent_link')}
-              </a>
+              </Link>
             </label>
           </div>
 
