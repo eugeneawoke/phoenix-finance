@@ -41,7 +41,11 @@
       "Bash(grep:*)",
       "Bash(# Check if the in-memory rate limiter has a potential issue with serverless \\(cold start resets\\) # Also check the ''about'' page content for completeness cat /Users/eugene.gusakov/Documents/PhoenixFinanceRevolution13/phoenix-finance/src/components/shared/AboutPageContent.tsx)",
       "Bash(# Check the ServicesPageContent cat /Users/eugene.gusakov/Documents/PhoenixFinanceRevolution13/phoenix-finance/src/components/services/ServicesPageContent.tsx)",
-      "Bash(npm run dev:*)"
+      "Bash(npm run dev:*)",
+      "Bash(git submodule status:*)",
+      "Bash(git restore:*)",
+      "Bash(more git submodules\" warnings during Vercel build. This prevented the \napplication from building correctly and resulted in 404 NOT_FOUND responses.\n\nRemoving this worktree from git resolves:\n- Git submodule fetch failures\n- 404 errors on deployed site\n- Build reliability issues\n\nCo-Authored-By: Claude Haiku 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(git ls-tree:*)"
     ]
   }
 }

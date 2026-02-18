@@ -53,12 +53,18 @@ export function HowItWorks() {
         </motion.div>
 
         <div ref={containerRef} className="relative max-w-3xl mx-auto overflow-hidden pb-4">
-          {/* Background line (static, dimmed) */}
-          <div className="absolute left-6 md:left-8 top-8 md:top-12 bottom-0 w-px bg-white/5" />
+          {/* Background line (static, dimmed) — fades out before last circle */}
+          <div
+            className="absolute left-6 md:left-8 top-8 md:top-12 bottom-0 w-px bg-white/5"
+            style={{
+              maskImage: 'linear-gradient(to bottom, black 0%, black 82%, transparent 100%)',
+              WebkitMaskImage: 'linear-gradient(to bottom, black 0%, black 82%, transparent 100%)',
+            }}
+          />
 
-          {/* Animated gold line - constrained to content */}
+          {/* Animated gold line — fades out at the end */}
           <motion.div
-            className="absolute left-6 md:left-8 top-8 md:top-12 w-px bg-gradient-to-b from-phoenix-gold via-phoenix-gold-light to-phoenix-gold origin-top"
+            className="absolute left-6 md:left-8 top-8 md:top-12 w-px bg-gradient-to-b from-phoenix-gold via-phoenix-gold-light to-transparent origin-top"
             style={{ height: useTransform(lineHeight, (v) => `calc(${v}% - 2rem)`) }}
           />
 

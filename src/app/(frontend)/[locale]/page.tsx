@@ -50,7 +50,6 @@ export default async function HomePage({ params }: Props) {
   return (
     <>
       <Hero />
-      <div className="section-divider" />
       <ServicesOverview />
       <Stats />
       <HowItWorks />
