@@ -6,18 +6,14 @@ type Props = { params: Promise<{ locale: string }> }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params
-  const t = await getTranslations({ locale, namespace: 'partnership' })
+  const t = await getTranslations({ locale, namespace: 'metadata' })
 
   return {
-    title: t('title') || 'Partnership | Phoenix Finance',
-    description:
-      t('description') ||
-      'Join forces with Phoenix Finance. We partner with businesses and organizations to drive financial innovation.',
+    title: t('partnership.title'),
+    description: t('partnership.description'),
     openGraph: {
-      title: t('title') || 'Partnership | Phoenix Finance',
-      description:
-        t('description') ||
-        'Explore partnership opportunities with Phoenix Finance.',
+      title: t('partnership.title'),
+      description: t('partnership.description'),
       type: 'website',
       images: [
         {
@@ -30,9 +26,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     },
     twitter: {
       card: 'summary_large_image',
-      title: t('title') || 'Partnership | Phoenix Finance',
-      description:
-        t('description') || 'Partnership opportunities with Phoenix Finance.',
+      title: t('partnership.title'),
+      description: t('partnership.description'),
     },
   }
 }

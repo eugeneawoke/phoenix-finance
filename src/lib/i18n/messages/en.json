@@ -271,5 +271,43 @@
     "password": "Password",
     "confirm_password": "Confirm Password",
     "submit": "Submit"
+  },
+  "metadata": {
+    "home": {
+      "title": "Phoenix Finance Revolution | Accounting & Tax Services in Georgia",
+      "description": "Full-cycle accounting, tax planning, and financial reporting services for businesses in Georgia. Experienced team, transparent pricing, multilingual support."
+    },
+    "about": {
+      "title": "About Us | Phoenix Finance Revolution",
+      "description": "Learn about Phoenix Finance Revolution — our mission, values, and commitment to transparent, efficient financial management for businesses in Georgia."
+    },
+    "services": {
+      "title": "Our Services | Phoenix Finance Revolution",
+      "description": "Comprehensive accounting, tax planning, business registration, audit, and financial consulting services tailored to your business needs in Georgia."
+    },
+    "contact": {
+      "title": "Contact Us | Phoenix Finance Revolution",
+      "description": "Get in touch with our team for any inquiries or to schedule a free consultation. We respond within 1 business day."
+    },
+    "education": {
+      "title": "Education & Resources | Phoenix Finance Revolution",
+      "description": "Stay informed with the latest insights in accounting, taxation, and financial management for businesses in Georgia."
+    },
+    "ngo": {
+      "title": "NGO & Community Programs | Phoenix Finance Revolution",
+      "description": "Supporting financial literacy, education, and community development. Join our programs, events, and community initiatives."
+    },
+    "partnership": {
+      "title": "Partnership Programs | Phoenix Finance Revolution",
+      "description": "Join our network and grow together. Explore business partnerships, sponsorship, internship, and scholarship opportunities."
+    },
+    "privacy": {
+      "title": "Privacy Policy | Phoenix Finance Revolution",
+      "description": "Learn how we handle and protect your data. Our commitment to your privacy and security."
+    },
+    "terms": {
+      "title": "Terms of Service | Phoenix Finance Revolution",
+      "description": "Terms and conditions governing the use of our services and platform."
+    }
   }
 }

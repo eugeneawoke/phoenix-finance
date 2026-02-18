@@ -6,12 +6,11 @@ type Props = { params: Promise<{ locale: string }> }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params
-  const t = await getTranslations({ locale, namespace: 'footer' })
+  const t = await getTranslations({ locale, namespace: 'metadata' })
 
   return {
-    title: t('terms') || 'Terms of Service | Phoenix Finance',
-    description:
-      'Review the terms of service that govern your use of Phoenix Finance services and platforms.',
+    title: t('terms.title'),
+    description: t('terms.description'),
     robots: {
       index: true,
       follow: true,
@@ -22,7 +21,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function TermsPage({ params }: Props) {
   const { locale } = await params
   setRequestLocale(locale)
-  const t = await getTranslations({ locale, namespace: 'terms' })
+  const t = await getTranslations({ locale, namespace: 'metadata' })
 
   return (
     <main className="min-h-screen bg-phoenix-navy-950">

@@ -6,18 +6,14 @@ type Props = { params: Promise<{ locale: string }> }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params
-  const t = await getTranslations({ locale, namespace: 'education' })
+  const t = await getTranslations({ locale, namespace: 'metadata' })
 
   return {
-    title: t('title') || 'Education | Phoenix Finance',
-    description:
-      t('description') ||
-      'Access Phoenix Finance educational resources to expand your financial knowledge and build better habits.',
+    title: t('education.title'),
+    description: t('education.description'),
     openGraph: {
-      title: t('title') || 'Education | Phoenix Finance',
-      description:
-        t('description') ||
-        'Learn and grow with Phoenix Finance educational programs.',
+      title: t('education.title'),
+      description: t('education.description'),
       type: 'website',
       images: [
         {
@@ -30,10 +26,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     },
     twitter: {
       card: 'summary_large_image',
-      title: t('title') || 'Education | Phoenix Finance',
-      description:
-        t('description') ||
-        'Access educational resources from Phoenix Finance.',
+      title: t('education.title'),
+      description: t('education.description'),
     },
   }
 }
