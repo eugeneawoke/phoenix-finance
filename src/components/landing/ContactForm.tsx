@@ -6,6 +6,7 @@ import { motion } from 'framer-motion'
 import { Send, CheckCircle, AlertCircle } from 'lucide-react'
 import { cn } from '@/lib/utils/cn'
 import { Link } from '@/lib/i18n/routing'
+import { CustomSelect } from '@/components/ui/CustomSelect'
 import PhoneInput, {
   getCountries,
   getCountryCallingCode,
@@ -84,6 +85,7 @@ export function ContactForm() {
   const [consentChecked, setConsentChecked] = useState(false)
   const [phone, setPhone] = useState<string | undefined>()
   const [country, setCountry] = useState<Country>(detectCountryFromTimezone)
+  const [subject, setSubject] = useState('general')
   const shouldRefocus = useRef(false)
   const phoneContainerRef = useRef<HTMLDivElement>(null)
   const formLoadedAt = useRef(Date.now())
@@ -146,7 +148,7 @@ export function ContactForm() {
           name: formData.get('name'),
           email: formData.get('email'),
           phone: phone || '',
-          subject: formData.get('subject'),
+          subject: subject,
           message: formData.get('message'),
           _token: formData.get('_token'),
           website_url: formData.get('website_url'),
@@ -158,6 +160,7 @@ export function ContactForm() {
         ;(e.target as HTMLFormElement).reset()
         setPhone(undefined)
         setConsentChecked(false)
+        setSubject('general')
         setCountry(detectCountryFromTimezone())
         formLoadedAt.current = Date.now()
       } else {
@@ -303,36 +306,20 @@ export function ContactForm() {
               </div>
             </div>
             <div>
-              <label
-                htmlFor="contact-subject"
-                className="block text-sm font-medium text-phoenix-gray-300 mb-2 pl-4"
-              >
-                {t('subject')}
-              </label>
-              <div className="relative custom-select-wrapper">
-                <select
-                  id="contact-subject"
-                  name="subject"
-                  className="appearance-none w-full bg-phoenix-navy-800 border border-white/10 rounded-xl px-4 py-3 pr-10 text-phoenix-white focus:border-phoenix-gold focus:outline-none transition-colors cursor-pointer custom-select-field"
-                >
-                  <option value="general">{t('subjects.general')}</option>
-                  <option value="services">{t('subjects.services')}</option>
-                  <option value="partnership">{t('subjects.partnership')}</option>
-                  <option value="ngo">{t('subjects.ngo')}</option>
-                  <option value="other">{t('subjects.other')}</option>
-                </select>
-                <svg
-                  className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-phoenix-gold pointer-events-none"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              </div>
+              <CustomSelect
+                id="contact-subject"
+                name="subject"
+                label={t('subject')}
+                value={subject}
+                onChange={setSubject}
+                options={[
+                  { value: 'general', label: t('subjects.general') },
+                  { value: 'services', label: t('subjects.services') },
+                  { value: 'partnership', label: t('subjects.partnership') },
+                  { value: 'ngo', label: t('subjects.ngo') },
+                  { value: 'other', label: t('subjects.other') },
+                ]}
+              />
               <p className="text-xs text-phoenix-gray-500 mt-1.5 pl-4">
                 {t('subject_hint')}
               </p>
