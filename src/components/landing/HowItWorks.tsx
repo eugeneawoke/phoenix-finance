@@ -25,11 +25,11 @@ export function HowItWorks() {
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ['start 0.8', 'end 0.2'],
+    offset: ['start 0.5', 'end 0.5'],
   })
 
-  // Limit line height to 0-80% to stop before the last step
-  const lineHeight = useSpring(useTransform(scrollYProgress, [0, 1], [0, 80]), {
+  // Animate line to 100% but it stops naturally at step 4
+  const lineHeight = useSpring(useTransform(scrollYProgress, [0, 1], [0, 100]), {
     stiffness: 100,
     damping: 30,
   })
@@ -76,7 +76,7 @@ export function HowItWorks() {
                 {/* Circle with number */}
                 <div className="relative z-10 shrink-0 flex items-center justify-center">
                   <div className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-phoenix-navy border-2 border-phoenix-gold/40 flex items-center justify-center shadow-lg shadow-phoenix-gold/10">
-                    <span className="text-lg md:text-xl font-bold gold-text font-serif leading-none">
+                    <span className="text-lg md:text-xl font-bold gold-text font-serif leading-none" style={{ transform: 'translateY(-1px)' }}>
                       {i + 1}
                     </span>
                   </div>
