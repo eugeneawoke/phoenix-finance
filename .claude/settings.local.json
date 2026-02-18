@@ -40,7 +40,8 @@
       "mcp__Sanity__publish_documents",
       "Bash(grep:*)",
       "Bash(# Check if the in-memory rate limiter has a potential issue with serverless \\(cold start resets\\) # Also check the ''about'' page content for completeness cat /Users/eugene.gusakov/Documents/PhoenixFinanceRevolution13/phoenix-finance/src/components/shared/AboutPageContent.tsx)",
-      "Bash(# Check the ServicesPageContent cat /Users/eugene.gusakov/Documents/PhoenixFinanceRevolution13/phoenix-finance/src/components/services/ServicesPageContent.tsx)"
+      "Bash(# Check the ServicesPageContent cat /Users/eugene.gusakov/Documents/PhoenixFinanceRevolution13/phoenix-finance/src/components/services/ServicesPageContent.tsx)",
+      "Bash(npm run dev:*)"
     ]
   }
 }
