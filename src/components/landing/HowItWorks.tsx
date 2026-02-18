@@ -28,8 +28,8 @@ export function HowItWorks() {
     offset: ['start 0.5', 'end 0.5'],
   })
 
-  // Limit line to 80% - stops at step 4, doesn't reach step 5
-  const lineHeight = useSpring(useTransform(scrollYProgress, [0, 1], [0, 80]), {
+  // Line reaches step 5 but stops there (100% of container height)
+  const lineHeight = useSpring(useTransform(scrollYProgress, [0, 1], [0, 100]), {
     stiffness: 100,
     damping: 30,
   })
@@ -52,7 +52,7 @@ export function HowItWorks() {
           </p>
         </motion.div>
 
-        <div ref={containerRef} className="relative max-w-3xl mx-auto">
+        <div ref={containerRef} className="relative max-w-3xl mx-auto overflow-hidden">
           {/* Background line (static, dimmed) */}
           <div className="absolute left-6 md:left-8 top-8 md:top-12 bottom-8 w-px bg-white/5" />
 
