@@ -7,7 +7,16 @@ type Props = { params: Promise<{ locale: string }> }
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'footer' })
-  return { title: t('terms') }
+
+  return {
+    title: t('terms') || 'Terms of Service | Phoenix Finance',
+    description:
+      'Review the terms of service that govern your use of Phoenix Finance services and platforms.',
+    robots: {
+      index: true,
+      follow: true,
+    },
+  }
 }
 
 export default async function TermsPage({ params }: Props) {

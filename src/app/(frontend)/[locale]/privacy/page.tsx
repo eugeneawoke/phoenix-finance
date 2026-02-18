@@ -7,7 +7,16 @@ type Props = { params: Promise<{ locale: string }> }
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'footer' })
-  return { title: t('privacy') }
+
+  return {
+    title: t('privacy') || 'Privacy Policy | Phoenix Finance',
+    description:
+      'Read our privacy policy to understand how Phoenix Finance protects and handles your personal information.',
+    robots: {
+      index: true,
+      follow: true,
+    },
+  }
 }
 
 export default async function PrivacyPage({ params }: Props) {
