@@ -309,11 +309,11 @@ export function ContactForm() {
               >
                 {t('subject')}
               </label>
-              <div className="relative">
+              <div className="relative custom-select-wrapper">
                 <select
                   id="contact-subject"
                   name="subject"
-                  className="appearance-none w-full bg-phoenix-navy-800 border border-white/10 rounded-xl px-4 py-3 pr-10 text-phoenix-white focus:border-phoenix-gold focus:outline-none transition-colors cursor-pointer"
+                  className="appearance-none w-full bg-phoenix-navy-800 border border-white/10 rounded-xl px-4 py-3 pr-10 text-phoenix-white focus:border-phoenix-gold focus:outline-none transition-colors cursor-pointer custom-select-field"
                 >
                   <option value="general">{t('subjects.general')}</option>
                   <option value="services">{t('subjects.services')}</option>

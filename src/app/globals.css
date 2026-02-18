@@ -329,3 +329,61 @@
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-phoenix-navy-500);
 }
+
+/* ============================================
+   CUSTOM SELECT DROPDOWN STYLING
+   ============================================ */
+
+select {
+  /* Remove default browser dropdown appearance */
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+/* Style custom dropdown that matches form design */
+select::-webkit-listbox {
+  background: var(--color-phoenix-navy-800);
+  color: var(--color-phoenix-white);
+}
+
+/* Firefox dropdown styling */
+select::-moz-listbox {
+  background: var(--color-phoenix-navy-800);
+  color: var(--color-phoenix-white);
+}
+
+/* Dropdown options */
+option {
+  background: var(--color-phoenix-navy-800);
+  color: var(--color-phoenix-white);
+  padding: 8px 12px;
+  border: none;
+}
+
+option:checked {
+  background: linear-gradient(135deg, #D4A517 0%, #F0C94D 50%, #D4A517 100%);
+  color: var(--color-phoenix-navy);
+  font-weight: 500;
+}
+
+option:hover {
+  background: var(--color-phoenix-navy-700);
+}
+
+/* Custom select wrapper for consistent dropdown width */
+.custom-select-wrapper {
+  width: 100%;
+}
+
+.custom-select-field {
+  width: 100%;
+  padding-right: calc(2.5rem + 4px);
+}
+
+/* On webkit browsers (Chrome, Safari, Edge) */
+.custom-select-wrapper select {
+  /* This limits the dropdown popup */
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
