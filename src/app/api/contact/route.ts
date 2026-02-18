@@ -36,12 +36,12 @@ const contactSchema = z.object({
 
 export async function POST(request: NextRequest) {
   try {
-    // 1. Rate limiting by IP
+    // 1. Rate limiting by IP (using Upstash Redis in production, in-memory fallback in dev)
     const ip =
       request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ||
       request.headers.get('x-real-ip') ||
       'unknown'
-    const rateCheck = checkRateLimit(`contact:${ip}`, 3, 600000) // 3 per 10min
+    const rateCheck = await checkRateLimit(`contact:${ip}`, 3, 600000) // 3 per 10min
     if (!rateCheck.allowed) {
       return NextResponse.json(
         { error: 'Too many requests. Please try again later.' },

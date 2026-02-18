@@ -20,7 +20,7 @@ export async function POST(request: NextRequest) {
     const ip =
       request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ||
       'unknown'
-    const rateCheck = checkRateLimit(`newsletter:${ip}`, 3, 600000)
+    const rateCheck = await checkRateLimit(`newsletter:${ip}`, 3, 600000)
     if (!rateCheck.allowed) {
       return NextResponse.json(
         { error: 'Too many requests' },
