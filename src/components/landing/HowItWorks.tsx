@@ -52,9 +52,9 @@ export function HowItWorks() {
           </p>
         </motion.div>
 
-        <div ref={containerRef} className="relative max-w-3xl mx-auto overflow-hidden">
+        <div ref={containerRef} className="relative max-w-3xl mx-auto overflow-hidden pb-4">
           {/* Background line (static, dimmed) */}
-          <div className="absolute left-6 md:left-8 top-8 md:top-12 bottom-8 w-px bg-white/5" />
+          <div className="absolute left-6 md:left-8 top-8 md:top-12 bottom-0 w-px bg-white/5" />
 
           {/* Animated gold line - constrained to content */}
           <motion.div
