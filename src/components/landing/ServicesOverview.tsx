@@ -26,7 +26,7 @@ const serviceIcons: Record<string, React.ElementType> = {
   international: Globe,
 }
 
-const serviceKeys = [
+const allServiceKeys = [
   'accounting',
   'tax',
   'audit',
@@ -36,6 +36,9 @@ const serviceKeys = [
   'reporting',
   'international',
 ] as const
+
+// Show only first 4 services on homepage
+const homepageServiceKeys = allServiceKeys.slice(0, 4)
 
 export function ServicesOverview() {
   const t = useTranslations('services')
@@ -59,7 +62,7 @@ export function ServicesOverview() {
         </motion.div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {serviceKeys.map((key, i) => {
+          {homepageServiceKeys.map((key, i) => {
             const Icon = serviceIcons[key]
             return (
               <motion.div
