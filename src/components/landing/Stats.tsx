@@ -73,9 +73,9 @@ export function Stats() {
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          <h3 className="text-2xl sm:text-3xl font-bold text-center mb-10">
+          <h2 className="text-2xl sm:text-3xl font-bold text-center mb-10">
             <span className="gold-text">{tw('title')}</span>
-          </h3>
+          </h2>
           <div className="relative flex flex-col md:flex-row items-stretch md:items-start justify-between gap-8 md:gap-0">
             {/* Connecting line between icons only (desktop) */}
             {/* Line is positioned at vertical center of the icons (h-14 = 56px, center = 28px = top-7) */}
