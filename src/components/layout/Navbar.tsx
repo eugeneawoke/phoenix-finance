@@ -11,7 +11,6 @@ const mainNavItems = [
   { href: '/', labelKey: 'home' },
   { href: '/services', labelKey: 'services' },
   { href: '/about', labelKey: 'about' },
-  { href: '/contact', labelKey: 'contact' },
 ] as const
 
 const projectsDropdown = [
